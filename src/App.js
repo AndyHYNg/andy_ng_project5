@@ -3,6 +3,9 @@ import "./App.css";
 import CocktailList from "./Cocktail";
 import cocktail from "./cocktail.png";
 import axios from 'axios';
+import firebase from './firebase';
+
+const dbRef = firebase.database().ref();
 
 class App extends Component {
   constructor() {
@@ -74,6 +77,16 @@ class App extends Component {
     })
   }
 
+  saveCocktail = (cocktail, cocktailIngredients) => {
+    console.log('REEEEEEEEEEEE', cocktail.strDrink);
+    const cocktailItem = {
+      name: cocktail.strDrink,
+      thumbnail: cocktail.strDrinkThumb,
+      ingredients: cocktailIngredients
+    }
+    dbRef.push(cocktailItem);
+  }
+
   render() {
     return (
       <Fragment>
@@ -88,8 +101,12 @@ class App extends Component {
             <button className="randomCocktail" type="button" onClick={this.handleRequest}>Give me a random drink!</button>
           </form>
           {this.state.showSearchCocktails 
-            ? <CocktailList cocktails={this.state.cocktails} /> 
+            ? <CocktailList saveCocktail={this.saveCocktail} cocktails={this.state.cocktails} /> 
             : null}
+        </div>
+
+        <div className="SavedDrinks">
+            <h2>Saved Drinks</h2>
         </div>
       </Fragment>
     );
