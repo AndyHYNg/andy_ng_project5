@@ -10,9 +10,8 @@ class App extends Component {
     this.state = {
       searchRequest: "",
       cocktails: [],
-      randomCocktail: false,
       showSavedCocktails: false,
-      showSearchCocktails: true
+      showSearchCocktails: false
     };
   }
 
@@ -30,7 +29,21 @@ class App extends Component {
           });
         });
     }
-    return axios
+    else if (this.state.searchRequest === "") {
+      return axios
+        .get(`https://www.thecocktaildb.com/api/json/v1/1/search.php`, {
+          params: {
+            s: null
+          }
+        })
+        .then(res => {
+          this.setState({
+            cocktails: res.data.drinks || []  // need to set this for edge case 
+          });
+        });      
+    }
+    else {
+      return axios
         .get(`https://www.thecocktaildb.com/api/json/v1/1/search.php`, {
           params: {
             s: this.state.searchRequest
@@ -41,6 +54,7 @@ class App extends Component {
             cocktails: res.data.drinks || []  // need to set this for edge case 
           });
         });
+      }
   };
 
   handleRequest = (e) => {
@@ -49,7 +63,8 @@ class App extends Component {
     this.getCocktail(e);
     // clear input
     this.setState({
-      searchRequest: ""
+      searchRequest: "",
+      showSearchCocktails: true
     });
   }
 
@@ -72,7 +87,9 @@ class App extends Component {
             <input type="submit" value="Search"></input>
             <button className="randomCocktail" type="button" onClick={this.handleRequest}>Give me a random drink!</button>
           </form>
-          <CocktailList cocktails={this.state.cocktails} />
+          {this.state.showSearchCocktails 
+            ? <CocktailList cocktails={this.state.cocktails} /> 
+            : null}
         </div>
       </Fragment>
     );

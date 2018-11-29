@@ -17,6 +17,29 @@ const SingleCocktail = cocktail => {
         <li>
             <h3>{cocktail.strDrink}</h3>
             <img src={cocktail.strDrinkThumb} alt={cocktail.strDrink} />
+            {CocktailIngredients(cocktail)}
+        </li>
+    )
+}
+
+const CocktailIngredients = cocktail => {
+    let cocktailIngredients = [];
+    for (let property in cocktail) {
+      if (/strIngredient/.test(property) && cocktail[property] !== null && cocktail[property] !== "") {
+        cocktailIngredients.push(cocktail[property]);
+      }
+    }
+    return (
+        <ul>
+            {cocktailIngredients.map(currIngredients => Ingredients(currIngredients))}
+        </ul>
+    )
+}
+
+const Ingredients = cocktailIngredients => {
+    return (
+        <li>
+            {cocktailIngredients}
         </li>
     )
 }
