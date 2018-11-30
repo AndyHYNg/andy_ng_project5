@@ -37,7 +37,6 @@ const SingleCocktail = props => {
       <h3>{props.cocktail.strDrink}</h3>
       <img src={props.cocktail.strDrinkThumb} alt={props.cocktail.strDrink} />
       {ingredientsList(cocktailIngredients)}
-      {console.log(props.userstate)}
       {props.userState ? (
         <button
           className="saveCocktail"

@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import "./App.css";
 import CocktailList from "./Cocktail";
-import SavedList from "./List";
+// import SavedList from "./List";
 import cocktail from "./cocktail.png";
 import axios from "axios";
 import firebase, { auth, provider } from "./firebase";
@@ -64,15 +64,11 @@ class App extends Component {
     auth.onAuthStateChanged(user => {
       if (user) {
         this.setState({ user });
-        // console.log(this.state.user.uid);
         const userDBRef = firebase.database().ref(`uid/${this.state.user.uid}`);
         userDBRef.on("value", snapshot => {
           this.setState({
-            // Firebase does all the heavylifting and clones the updated objects in it in realtime, no need to use Array.from() / Object cloning to do the cloning procedure
-            // if there is no value in the database...we need to check if the database is empty/null (check below on handling this error)
             savedCocktails: snapshot.val()
           });
-          console.log(this.state.savedCocktails);
         });
       }
     });
@@ -84,7 +80,7 @@ class App extends Component {
         user: null
       });
     });
-  }
+  };
 
   login = () => {
     auth.signInWithPopup(provider).then(result => {
@@ -93,7 +89,7 @@ class App extends Component {
         user
       });
     });
-  }
+  };
 
   handleRequest = e => {
     e.preventDefault();
@@ -113,7 +109,6 @@ class App extends Component {
   };
 
   saveCocktail = (cocktail, cocktailIngredients) => {
-    console.log(this.state.user);
     const cocktailItem = {
       id: cocktail.idDrink,
       user: this.state.user.email,
@@ -126,12 +121,14 @@ class App extends Component {
     // return notice to say it has been updated to db HERE
   };
 
-  removeCocktail = (e) => {
+  removeCocktail = e => {
     const firebaseKey = e.target.id;
-    console.log(firebaseKey);
-    const cocktailDBRef = firebase.database().ref(`uid/${this.state.user.uid}/${firebaseKey}`);
-    console.log(cocktailDBRef);
-  }
+    const cocktailDBRef = firebase
+      .database()
+      .ref(`uid/${this.state.user.uid}/${firebaseKey}`);
+    cocktailDBRef.remove();
+    alert("Cocktail removed!");
+  };
 
   render() {
     return (
@@ -190,13 +187,14 @@ class App extends Component {
                         />
                         <ul>
                           {cocktail[1].ingredients.forEach(ingredient => {
-                            return (<li>{ingredient}</li>)
+                            return <li>{ingredient}</li>;
                           })}
                         </ul>
                         <button
                           className="removeCocktail"
                           type="button"
                           onClick={this.removeCocktail}
+                          id={cocktail[0]}
                         >
                           Remove this drink
                         </button>
