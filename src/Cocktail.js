@@ -1,58 +1,70 @@
-import React, { Component, Fragment } from "react";
+import React, { Fragment } from "react";
+
+// from uuid npm package
+const uuidv4 = require("uuid/v4");
 
 const CocktailList = props => {
   return (
     <div>
       <h2>List of cocktails:</h2>
       <ul>
-        {props.cocktails.map(currCocktail =>
-          SingleCocktail(currCocktail, props)
-        )}
+        {props.cocktails.map(currCocktail => (
+          <SingleCocktail
+            key={currCocktail.idDrink}
+            cocktail={currCocktail}
+            userState={props.userState}
+            saveCocktail={props.saveCocktail}
+          />
+        ))}
       </ul>
     </div>
   );
 };
 
-const SingleCocktail = (cocktail, props) => {
+const SingleCocktail = props => {
   let cocktailIngredients = [];
-  for (let property in cocktail) {
+  for (let property in props.cocktail) {
     if (
       /strIngredient/.test(property) &&
-      cocktail[property] !== null &&
-      cocktail[property] !== ""
+      props.cocktail[property] !== null &&
+      props.cocktail[property] !== ""
     ) {
-      cocktailIngredients.push(cocktail[property]);
+      cocktailIngredients.push(props.cocktail[property]);
     }
   }
-  //   console.log(cocktail, "single cocktail", cocktailIngredients);
   return (
-    <li key={cocktail.idDrink}> {/*need to fix this*/}
-      <h3>{cocktail.strDrink}</h3>
-      <img src={cocktail.strDrinkThumb} alt={cocktail.strDrink} />
-      {SingleIngredient(cocktailIngredients)}
-      {props.userState 
-      ? (<button
-        className="saveCocktail"
-        type="button"
-        onClick={() => props.saveCocktail(cocktail, cocktailIngredients)}
-      >
-        Save this drink
-      </button>)
-      : null}
+    <li key={props.cocktail.idDrink}>
+      <h3>{props.cocktail.strDrink}</h3>
+      <img src={props.cocktail.strDrinkThumb} alt={props.cocktail.strDrink} />
+      {ingredientsList(cocktailIngredients)}
+      {console.log(props.userstate)}
+      {props.userState ? (
+        <button
+          className="saveCocktail"
+          type="button"
+          onClick={() =>
+            props.saveCocktail(props.cocktail, cocktailIngredients)
+          }
+        >
+          Save this drink
+        </button>
+      ) : null}
     </li>
   );
 };
 
-const SingleIngredient = ingredientsList => {
+const ingredientsList = list => {
   return (
     <ul>
-      {ingredientsList.map(currIngredients => Ingredients(currIngredients))}
+      {list.map(currIngredient => (
+        <SingleIngredient key={uuidv4()} ingredient={currIngredient} />
+      ))}
     </ul>
   );
 };
 
-const Ingredients = cocktailIngredients => {
-  return <li>{cocktailIngredients}</li>;
+const SingleIngredient = props => {
+  return <li>{props.ingredient}</li>;
 };
 
 export default CocktailList;
