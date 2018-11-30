@@ -3,18 +3,22 @@ import "./App.css";
 import CocktailList from "./Cocktail";
 import cocktail from "./cocktail.png";
 import axios from 'axios';
-import firebase from './firebase';
+import firebase, { auth, provider } from './firebase';
 
 const dbRef = firebase.database().ref();
 
 class App extends Component {
   constructor() {
     super();
+    this.login = this.login.bind(this);
+    this.logout = this.logout.bind(this);
     this.state = {
+      user: null, // for Google auth
       searchRequest: "",
       cocktails: [],
       showSavedCocktails: false,
-      showSearchCocktails: false
+      showSearchCocktails: false,
+      
     };
   }
 
@@ -60,6 +64,36 @@ class App extends Component {
       }
   };
 
+  componentDidMount() {
+  auth.onAuthStateChanged((user) => {
+    if (user) {
+      this.setState({ user });
+    } 
+  });
+}
+  // ...
+
+  handleChange(e) {
+    /* ... */
+  }
+  logout() {
+    auth.signOut()
+      .then(() => {
+        this.setState({
+          user: null
+        });
+      });
+  }
+  login() {
+    auth.signInWithPopup(provider)
+      .then((result) => {
+        const user = result.user;
+        this.setState({
+          user
+        });
+      });
+  }
+
   handleRequest = (e) => {
     e.preventDefault();
     // invoke axios request
@@ -80,6 +114,7 @@ class App extends Component {
   saveCocktail = (cocktail, cocktailIngredients) => {
     console.log('REEEEEEEEEEEE', cocktail.strDrink);
     const cocktailItem = {
+      user: this.state.user.email,
       name: cocktail.strDrink,
       thumbnail: cocktail.strDrinkThumb,
       ingredients: cocktailIngredients
@@ -90,7 +125,7 @@ class App extends Component {
   render() {
     return (
       <Fragment>
-        <div className="App">
+          <div className="App">
           <header></header>
           <h1>Cocktail Lookup</h1>
           <img src={cocktail} alt="Cocktail glass" />
@@ -106,7 +141,23 @@ class App extends Component {
         </div>
 
         <div className="SavedDrinks">
+          {this.state.user ?
+            <button onClick={this.logout}>Log Out</button>
+            :
+            <button onClick={this.login}>Log In</button>
+          }
             <h2>Saved Drinks</h2>
+          {this.state.user ?
+            <div>
+              <div className='user-profile'>
+                <img src={this.state.user.photoURL} />
+              </div>
+            </div>
+            :
+            <div className='wrapper'>
+              <p>You must be logged in to save cocktail drinks.</p>
+            </div>
+          }
         </div>
       </Fragment>
     );
