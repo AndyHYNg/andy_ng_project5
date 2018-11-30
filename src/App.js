@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import "./App.css";
 import CocktailList from "./Cocktail";
+import SavedList from "./List";
 import cocktail from "./cocktail.png";
 import axios from "axios";
 import firebase, { auth, provider } from "./firebase";
@@ -10,14 +11,11 @@ import firebase, { auth, provider } from "./firebase";
 class App extends Component {
   constructor() {
     super();
-    this.login = this.login.bind(this);
-    this.logout = this.logout.bind(this);
     this.state = {
       user: null, // for Google auth
       searchRequest: "",
       cocktails: [],
       savedCocktails: {},
-      showSavedCocktails: false,
       showSearchCocktails: false
     };
   }
@@ -66,23 +64,21 @@ class App extends Component {
     auth.onAuthStateChanged(user => {
       if (user) {
         this.setState({ user });
-        console.log(this.state.user.uid);
-        const userDBRef = firebase
-          .database()
-          .ref(`uid/${this.state.user.uid}`);
-          userDBRef.on('value', (snapshot) => {
-            this.setState({
-              // Firebase does all the heavylifting and clones the updated objects in it in realtime, no need to use Array.from() / Object cloning to do the cloning procedure
-              // if there is no value in the database...we need to check if the database is empty/null (check below on handling this error)
-              savedCocktails: snapshot.val()
-            });
-            console.log(this.state.savedCocktails);
+        // console.log(this.state.user.uid);
+        const userDBRef = firebase.database().ref(`uid/${this.state.user.uid}`);
+        userDBRef.on("value", snapshot => {
+          this.setState({
+            // Firebase does all the heavylifting and clones the updated objects in it in realtime, no need to use Array.from() / Object cloning to do the cloning procedure
+            // if there is no value in the database...we need to check if the database is empty/null (check below on handling this error)
+            savedCocktails: snapshot.val()
+          });
+          console.log(this.state.savedCocktails);
         });
       }
     });
   }
 
-  logout() {
+  logout = () => {
     auth.signOut().then(() => {
       this.setState({
         user: null
@@ -90,7 +86,7 @@ class App extends Component {
     });
   }
 
-  login() {
+  login = () => {
     auth.signInWithPopup(provider).then(result => {
       const user = result.user;
       this.setState({
@@ -119,6 +115,7 @@ class App extends Component {
   saveCocktail = (cocktail, cocktailIngredients) => {
     console.log(this.state.user);
     const cocktailItem = {
+      id: cocktail.idDrink,
       user: this.state.user.email,
       name: cocktail.strDrink,
       thumbnail: cocktail.strDrinkThumb,
@@ -128,6 +125,13 @@ class App extends Component {
     userDBRef.push(cocktailItem);
     // return notice to say it has been updated to db HERE
   };
+
+  removeCocktail = (e) => {
+    const firebaseKey = e.target.id;
+    console.log(firebaseKey);
+    const cocktailDBRef = firebase.database().ref(`uid/${this.state.user.uid}/${firebaseKey}`);
+    cocktailDBRef.remove();
+  }
 
   // listCocktails = () => {
   //   console.log(this.state.user);
@@ -163,6 +167,7 @@ class App extends Component {
             <CocktailList
               saveCocktail={this.saveCocktail}
               cocktails={this.state.cocktails}
+              userState={this.state.user}
             />
           ) : null}
         </div>
@@ -173,13 +178,39 @@ class App extends Component {
           ) : (
             <button onClick={this.login}>Log In</button>
           )}
-          <h2>Saved Drinks</h2>
           {this.state.user ? (
             <div>
               <div className="user-profile">
                 <img src={this.state.user.photoURL} />
               </div>
-              {/* <SavedList userDB={this. /> */}
+              {/* <SavedList savedCocktails={this.state.savedCocktails || {}} /> */}
+              <section>
+                {Object.entries(this.state.savedCocktails || {}).map(
+                  cocktail => {
+                    return (
+                      <div key={cocktail[0]}>
+                        <h2>{cocktail[1].name}</h2>
+                        <img
+                          src={cocktail[1].thumbnail}
+                          alt={cocktail[1].name}
+                        />
+                        <ul>
+                          {cocktail[1].ingredients.forEach(ingredient => {
+                            return (<li>{ingredient}</li>)
+                          })}
+                        </ul>
+                        <button
+                          className="removeCocktail"
+                          type="button"
+                          onClick={this.removeCocktail}
+                        >
+                          Remove this drink
+                        </button>
+                      </div>
+                    );
+                  }
+                )}
+              </section>
             </div>
           ) : (
             <div className="wrapper">

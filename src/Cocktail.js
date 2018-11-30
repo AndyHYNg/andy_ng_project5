@@ -26,17 +26,19 @@ const SingleCocktail = (cocktail, props) => {
   }
   //   console.log(cocktail, "single cocktail", cocktailIngredients);
   return (
-    <li>
+    <li key={cocktail.idDrink}> {/*need to fix this*/}
       <h3>{cocktail.strDrink}</h3>
       <img src={cocktail.strDrinkThumb} alt={cocktail.strDrink} />
       {SingleIngredient(cocktailIngredients)}
-      <button
+      {props.userState 
+      ? (<button
         className="saveCocktail"
         type="button"
         onClick={() => props.saveCocktail(cocktail, cocktailIngredients)}
       >
         Save this drink
-      </button>
+      </button>)
+      : null}
     </li>
   );
 };
