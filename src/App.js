@@ -1,12 +1,10 @@
 import React, { Component, Fragment } from "react";
 import "./App.css";
 import CocktailList from "./Cocktail";
-// import SavedList from "./List";
+import SavedList from "./List";
 import cocktail from "./cocktail.png";
 import axios from "axios";
 import firebase, { auth, provider } from "./firebase";
-
-// const dbRef = firebase.database().ref(`users`);
 
 class App extends Component {
   constructor() {
@@ -118,7 +116,7 @@ class App extends Component {
     };
     const userDBRef = firebase.database().ref(`uid/${this.state.user.uid}`);
     userDBRef.push(cocktailItem);
-    // return notice to say it has been updated to db HERE
+    alert("Cocktail added to Saved List!");
   };
 
   removeCocktail = e => {
@@ -174,35 +172,7 @@ class App extends Component {
               <div className="user-profile">
                 <img src={this.state.user.photoURL} />
               </div>
-              {/* <SavedList savedCocktails={this.state.savedCocktails || {}} /> */}
-              <section>
-                {Object.entries(this.state.savedCocktails || {}).map(
-                  cocktail => {
-                    return (
-                      <div key={cocktail[0]}>
-                        <h2>{cocktail[1].name}</h2>
-                        <img
-                          src={cocktail[1].thumbnail}
-                          alt={cocktail[1].name}
-                        />
-                        <ul>
-                          {cocktail[1].ingredients.forEach(ingredient => {
-                            return <li>{ingredient}</li>;
-                          })}
-                        </ul>
-                        <button
-                          className="removeCocktail"
-                          type="button"
-                          onClick={this.removeCocktail}
-                          id={cocktail[0]}
-                        >
-                          Remove this drink
-                        </button>
-                      </div>
-                    );
-                  }
-                )}
-              </section>
+              <SavedList removeCocktail={this.removeCocktail} savedCocktails={this.state.savedCocktails || {}} />
             </div>
           ) : (
             <div className="wrapper">

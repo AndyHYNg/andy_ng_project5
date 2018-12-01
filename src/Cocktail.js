@@ -8,14 +8,16 @@ const CocktailList = props => {
     <div>
       <h2>List of cocktails:</h2>
       <ul>
-        {props.cocktails.map(currCocktail => (
-          <SingleCocktail
-            key={currCocktail.idDrink}
-            cocktail={currCocktail}
-            userState={props.userState}
-            saveCocktail={props.saveCocktail}
-          />
-        ))}
+        {props.cocktails.map(currCocktail => {
+          return (
+            <SingleCocktail
+              key={currCocktail.idDrink}
+              cocktail={currCocktail}
+              userState={props.userState}
+              saveCocktail={props.saveCocktail}
+            />
+          );
+        })}
       </ul>
     </div>
   );
@@ -36,7 +38,12 @@ const SingleCocktail = props => {
     <li key={props.cocktail.idDrink}>
       <h3>{props.cocktail.strDrink}</h3>
       <img src={props.cocktail.strDrinkThumb} alt={props.cocktail.strDrink} />
-      {ingredientsList(cocktailIngredients)}
+      <h3>Ingredients</h3>
+      <ul>
+        {cocktailIngredients.map(currIngredient => (
+          <SingleIngredient key={uuidv4()} ingredient={currIngredient} />
+        ))}
+      </ul>
       {props.userState ? (
         <button
           className="saveCocktail"
@@ -49,16 +56,6 @@ const SingleCocktail = props => {
         </button>
       ) : null}
     </li>
-  );
-};
-
-const ingredientsList = list => {
-  return (
-    <ul>
-      {list.map(currIngredient => (
-        <SingleIngredient key={uuidv4()} ingredient={currIngredient} />
-      ))}
-    </ul>
   );
 };
 
