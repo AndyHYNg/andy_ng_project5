@@ -28,6 +28,22 @@
     // }
 }
 
+.header h1 {
+    padding-top: 10vh;
+    margin: 0;
+    text-transform: uppercase;
+    color: $light-shades;
+    font-size: 5rem;
+    line-height: 1;
+}
+
+.header h2 {
+    margin: 0;
+    text-transform: uppercase;
+    color: $light-shades;
+    font-size: 2.5rem;
+}
+
 .login-container {
     padding-top: 10%;
     display: flex;

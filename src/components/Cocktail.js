@@ -5,9 +5,9 @@ const uuidv4 = require("uuid/v4");
 
 const CocktailList = props => {
   return (
-    <div>
-      <h2>List of cocktails:</h2>
-      <ul>
+    <Fragment>
+      <h2>Search Results</h2>
+      <div className="results-section-cocktails">
         {props.cocktails.map(currCocktail => {
           return (
             <SingleCocktail
@@ -18,8 +18,8 @@ const CocktailList = props => {
             />
           );
         })}
-      </ul>
-    </div>
+      </div>
+    </Fragment>
   );
 };
 
@@ -35,15 +35,17 @@ const SingleCocktail = props => {
     }
   }
   return (
-    <li key={props.cocktail.idDrink}>
+    <div key={props.cocktail.idDrink}>
       <h3>{props.cocktail.strDrink}</h3>
       <img src={props.cocktail.strDrinkThumb} alt={props.cocktail.strDrink} />
-      <h3>Ingredients</h3>
-      <ul>
-        {cocktailIngredients.map(currIngredient => (
-          <SingleIngredient key={uuidv4()} ingredient={currIngredient} />
-        ))}
-      </ul>
+      <div className="ingredients-container">
+        <h4>Ingredients</h4>
+        <ul>
+          {cocktailIngredients.map(currIngredient => (
+            <SingleIngredient key={uuidv4()} ingredient={currIngredient} />
+          ))}
+        </ul>
+      </div>
       {props.userState ? (
         <button
           className="saveCocktail"
@@ -55,7 +57,7 @@ const SingleCocktail = props => {
           Save this drink
         </button>
       ) : null}
-    </li>
+    </div>
   );
 };
 

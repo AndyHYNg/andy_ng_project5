@@ -144,50 +144,41 @@ class App extends Component {
   };
 
   render() {
-    return (
-      <Fragment>
+    return <Fragment>
         {/* <Header scroll={this.scrollToMyRef} /> */}
         <header ref={this.homeRef} className="header">
           {/* <img src={cocktail} alt="Cocktail glass logo" /> */}
-          {this.state.user ? (
-              <div className="login-container">
-                <p>{this.state.user.displayName}</p>
-                <button className="login-button" onClick={this.logout}>
-                  <i className="fas fa-sign-in-alt"><span className="visuallyhidden">Log Out</span></i>
-                </button>
-              </div>
-            // <button className="login-button" onClick={this.logout}>Log Out</button>
-          ) : ( 
-              <div className="login-container">              
-                <p>Log In</p>
-                <button className="login-button" onClick={this.login}>
-                  <i className="fas fa-sign-in-alt"><span className="visuallyhidden">Log In</span></i>
-                </button>
-              </div>
-              // <button className="login-button" onClick={this.login}>Log In</button>
-            )}
+          {this.state.user ? <div className="login-container">
+              <p>{this.state.user.displayName}</p>
+              <button className="login-button" onClick={this.logout}>
+                <i className="fas fa-sign-in-alt">
+                  <span className="visuallyhidden">Log Out</span>
+                </i>
+              </button>
+            </div> : // <button className="login-button" onClick={this.logout}>Log Out</button>
+            <div className="login-container">
+              <p>Log In</p>
+              <button className="login-button" onClick={this.login}>
+                <i className="fas fa-sign-in-alt">
+                  <span className="visuallyhidden">Log In</span>
+                </i>
+              </button>
+            </div>
+            // <button className="login-button" onClick={this.login}>Log In</button>
+          }
           <h1>Bar Wizard</h1>
           <h2>A cocktail lookup app</h2>
           <form onSubmit={this.handleRequest} action="">
             <label htmlFor="searchRequest">Type in a cocktail drink</label>
-            <input
-              onChange={this.handleChange}
-              value={this.state.searchRequest}
-              type="text"
-              id="searchRequest"
-            />
+            <input onChange={this.handleChange} value={this.state.searchRequest} type="text" required="true" id="searchRequest" />
             <input type="submit" value="Search" />
-            <button
-              className="randomCocktail"
-              type="button"
-              onClick={this.handleRequest}
-            >
+            <button className="randomCocktail" type="button" onClick={this.handleRequest}>
               Give me a random drink!
             </button>
           </form>
         </header>
 
-        <section>
+        <section className="results-section">
           {this.state.showSearchCocktails ? (
             <CocktailList
               saveCocktail={this.saveCocktail}
@@ -198,26 +189,19 @@ class App extends Component {
         </section>
 
         <section ref={this.savedCocktailsRef} className="SavedDrinks">
-          {this.state.user ? (
-            <button onClick={this.logout}>Log Out</button>
-          ) : (
-            <button onClick={this.login}>Log In</button>
-          )}
-          {this.state.user ? (
-            <div>
+          {this.state.user ? <button onClick={this.logout}>
+              Log Out
+            </button> : <button onClick={this.login}>Log In</button>}
+          {this.state.user ? <div>
               <div className="user-profile">
                 <img src={this.state.user.photoURL} />
               </div>
               <SavedList removeCocktail={this.removeCocktail} savedCocktails={this.state.savedCocktails || {}} />
-            </div>
-          ) : (
-            <div className="wrapper">
+            </div> : <div className="wrapper">
               <p>You must be logged in to see saved cocktail drinks.</p>
-            </div>
-          )}
+            </div>}
         </section>
-      </Fragment>
-    );
+      </Fragment>;
   }
 }
 
