@@ -11,7 +11,6 @@ import swal from "sweetalert";
 
 /* STYLES AND IMAGES */
 import "../App.scss";
-import cocktail from "../cocktail.png";
 
 class App extends Component {
   constructor() {
@@ -22,9 +21,28 @@ class App extends Component {
       cocktails: [],
       savedCocktails: {},
       showSearchCocktails: false,
-      showMainPage: false,
+      showMainPage: true,
       showFavourites: false
     };
+  }
+
+  togglePage = e => {
+    e.preventDefault();
+    if (this.state[e.target.id] === false) {
+      this.setState ({
+        [e.target.id]: true
+      })
+      if (e.target.id === "showMainPage") {
+        this.setState({
+          showFavourites: false
+        })
+      }
+      else {
+        this.setState({
+          showMainPage: false
+        })
+      }
+    }
   }
 
   getCocktail = e => {
@@ -158,66 +176,68 @@ class App extends Component {
   render() {
     return (
       <Fragment>
-        {/* <Header scroll={this.scrollToMyRef} /> */}
-        <header className="header">
-          {this.state.user ? (
-            <div className="login-container">
-              <p>{this.state.user.displayName}</p>
-              <button className="login-button" onClick={this.logout}>
-                <i className="fas fa-sign-in-alt">
-                  <span className="visuallyhidden">Log Out</span>
-                </i>
+        <Header togglePage={this.togglePage} />
+        <main>
+          <section className="search-section">
+            {this.state.user ? (
+              <div className="login-container">
+                <p>{this.state.user.displayName}</p>
+                <button className="login-button" onClick={this.logout}>
+                  <i className="fas fa-sign-in-alt">
+                    <span className="visuallyhidden">Log Out</span>
+                  </i>
+                </button>
+              </div>
+            ) : (
+              <div className="login-container">
+                <p>Log In</p>
+                <button className="login-button" onClick={this.login}>
+                  <i className="fas fa-sign-in-alt">
+                    <span className="visuallyhidden">Log In</span>
+                  </i>
+                </button>
+              </div>
+            )}
+            <h1>Bar Wizard</h1>
+            <h2>A cocktail lookup app</h2>
+            <form onSubmit={this.handleRequest} action="">
+              <label htmlFor="searchRequest">Type in a cocktail drink</label>
+              <input
+                onChange={this.handleChange}
+                value={this.state.searchRequest}
+                type="text"
+                required={true}
+                id="searchRequest"
+              />
+              <input type="submit" value="Search" />
+              <button
+                className="randomCocktail"
+                type="button"
+                onClick={this.handleRequest}
+              >
+                Give me a random drink!
               </button>
-            </div>
-          ) : (
-            <div className="login-container">
-              <p>Log In</p>
-              <button className="login-button" onClick={this.login}>
-                <i className="fas fa-sign-in-alt">
-                  <span className="visuallyhidden">Log In</span>
-                </i>
-              </button>
-            </div>
-          )}
-          <h1>Bar Wizard</h1>
-          <h2>A cocktail lookup app</h2>
-          <form onSubmit={this.handleRequest} action="">
-            <label htmlFor="searchRequest">Type in a cocktail drink</label>
-            <input
-              onChange={this.handleChange}
-              value={this.state.searchRequest}
-              type="text"
-              required={true}
-              id="searchRequest"
-            />
-            <input type="submit" value="Search" />
-            <button
-              className="randomCocktail"
-              type="button"
-              onClick={this.handleRequest}
-            >
-              Give me a random drink!
-            </button>
-          </form>
-        </header>
-
-        {this.state.showSearchCocktails ? (
-          <section className="results-section">
-            <CocktailList
-              saveCocktail={this.saveCocktail}
-              cocktails={this.state.cocktails}
-              userState={this.state.user}
-            />
+            </form>
           </section>
-        ) : null}
 
-        <Favourites
-          savedCocktails={this.state.savedCocktails}
-          removeCocktail={this.removeCocktail}
-          userState={this.state.user}
-          login={this.login}
-          logout={this.logout}
-        />
+          {this.state.showSearchCocktails ? (
+            <section className="results-section">
+              <CocktailList
+                saveCocktail={this.saveCocktail}
+                cocktails={this.state.cocktails}
+                userState={this.state.user}
+              />
+            </section>
+          ) : null}
+
+          <Favourites
+            savedCocktails={this.state.savedCocktails}
+            removeCocktail={this.removeCocktail}
+            userState={this.state.user}
+            login={this.login}
+            logout={this.logout}
+          />
+        </main>
       </Fragment>
     );
   }

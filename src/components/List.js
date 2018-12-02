@@ -6,7 +6,6 @@ const uuidv4 = require("uuid/v4");
 const Favourites = props => {
   return (
     <section className="favourites">
-      {console.log(props.userState)}
       {props.userState ? (
         <div className="login-container">
           <p>{props.userState.displayName}</p>
