@@ -7,6 +7,7 @@ import Header from "./Header";
 /* METHODS */
 import axios from "axios";
 import firebase, { auth, provider } from "../firebase";
+import swal from 'sweetalert';
 
 /* STYLES AND IMAGES */
 import "../App.scss";
@@ -131,16 +132,27 @@ class App extends Component {
     };
     const userDBRef = firebase.database().ref(`uid/${this.state.user.uid}`);
     userDBRef.push(cocktailItem);
-    alert("Cocktail added to Saved List!");
+    swal({
+      title: "Cocktail added!",
+      text: `'${cocktail.strDrink}' added to your Favourites!`,
+      icon: "success",
+      button: "Sweeeeet!"
+    });
   };
 
   removeCocktail = e => {
     const firebaseKey = e.target.id;
+    const cocktailName = e.target.cocktailName;
     const cocktailDBRef = firebase
       .database()
       .ref(`uid/${this.state.user.uid}/${firebaseKey}`);
     cocktailDBRef.remove();
-    alert("Cocktail removed!");
+    swal({
+      title: "Cocktail removed!",
+      text: "Selected cocktail has been removed from your Favourites.",
+      icon: "success",
+      button: "OK"
+    });
   };
 
   render() {
@@ -170,7 +182,7 @@ class App extends Component {
           <h2>A cocktail lookup app</h2>
           <form onSubmit={this.handleRequest} action="">
             <label htmlFor="searchRequest">Type in a cocktail drink</label>
-            <input onChange={this.handleChange} value={this.state.searchRequest} type="text" required="true" id="searchRequest" />
+            <input onChange={this.handleChange} value={this.state.searchRequest} type="text" required={true} id="searchRequest" />
             <input type="submit" value="Search" />
             <button className="randomCocktail" type="button" onClick={this.handleRequest}>
               Give me a random drink!
