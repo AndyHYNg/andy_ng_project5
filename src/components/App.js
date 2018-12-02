@@ -159,7 +159,6 @@ class App extends Component {
 
   removeCocktail = e => {
     const firebaseKey = e.target.id;
-    const cocktailName = e.target.cocktailName;
     const cocktailDBRef = firebase
       .database()
       .ref(`uid/${this.state.user.uid}/${firebaseKey}`);

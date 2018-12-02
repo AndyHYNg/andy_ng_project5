@@ -29,7 +29,7 @@ const Favourites = props => {
         <div>
           <div className="user-profile">
             <h3>{props.userState.displayName}</h3>
-            <img src={props.userState.photoURL} />
+            <img src={props.userState.photoURL} alt={props.userState.displayName} />
           </div>
           <h2>Favourites</h2>
           <SavedList
@@ -38,9 +38,10 @@ const Favourites = props => {
           />
         </div>
       ) : (
-          <div className="wrapper">
+          <Fragment>
+            <h2>Favourites</h2>
             <p>You must be logged in to see saved cocktail drinks.</p>
-          </div>
+          </Fragment>
         )}
     </section>
   )
