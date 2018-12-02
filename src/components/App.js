@@ -200,8 +200,9 @@ class App extends Component {
               <h1>Bar Wizard</h1>
               <h2>A cocktail lookup app</h2>
               <form onSubmit={this.handleRequest} action="">
-                <label htmlFor="searchRequest">Type in a cocktail drink</label>
+                <label className="visuallyhidden" htmlFor="searchRequest">Search text</label>
                 <input
+                  placeholder="Ex. Margarita"
                   onChange={this.handleChange}
                   value={this.state.searchRequest}
                   type="text"
@@ -214,7 +215,7 @@ class App extends Component {
                   type="button"
                   onClick={this.handleRequest}
                 >
-                  Give me a random drink!
+                  I'm feeling adventurous
                 </button>
               </form>
             </section>
