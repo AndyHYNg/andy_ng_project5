@@ -5,25 +5,37 @@ const uuidv4 = require("uuid/v4");
 
 const SavedList = props => {
   return (
-    <section>
-      {Object.entries(props.savedCocktails).map(currCocktail => {
-        return <SavedCocktail removeCocktail={props.removeCocktail} key={currCocktail[0]} cocktail={currCocktail} />;
-      })}
-    </section>
+    <Fragment>
+      {props.savedCocktails ? (
+        Object.entries(props.savedCocktails).map(currCocktail => {
+          return (
+            <SavedCocktail
+              removeCocktail={props.removeCocktail}
+              key={currCocktail[0]}
+              cocktail={currCocktail}
+            />
+          );
+        })
+      ) : (
+        <p>You do not have any saved cocktails.</p>
+      )}
+    </Fragment>
   );
 };
 
 const SavedCocktail = props => {
   return (
-    <div>
-      <h2>{props.cocktail[1].name}</h2>
+    <div className="saved-list-container">
+      <h4>{props.cocktail[1].name}</h4>
       <img src={props.cocktail[1].thumbnail} alt={props.cocktail[1].name} />
-      <h3>Ingredients</h3>
-      <ul>
-        {props.cocktail[1].ingredients.map(currIngredient => (
-          <SavedIngredient key={uuidv4()} ingredient={currIngredient} />
-        ))}
-      </ul>
+      <div className="ingredients-container">
+        <h5>Ingredients</h5>
+        <ul>
+          {props.cocktail[1].ingredients.map(currIngredient => (
+            <SavedIngredient key={uuidv4()} ingredient={currIngredient} />
+          ))}
+        </ul>
+      </div>
       <button
         className="removeCocktail"
         type="button"

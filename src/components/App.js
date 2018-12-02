@@ -7,7 +7,7 @@ import Header from "./Header";
 /* METHODS */
 import axios from "axios";
 import firebase, { auth, provider } from "../firebase";
-import swal from 'sweetalert';
+import swal from "sweetalert";
 
 /* STYLES AND IMAGES */
 import "../App.scss";
@@ -81,12 +81,12 @@ class App extends Component {
     });
   }
 
-  scrollToMyRef = (e) => {
+  scrollToMyRef = e => {
     window.scrollTo({
       top: this.myRef.current.offsetTop,
       behavior: "smooth"
-    })
-  }
+    });
+  };
 
   logout = () => {
     auth.signOut().then(() => {
@@ -94,7 +94,7 @@ class App extends Component {
         user: null
       });
     });
-  }
+  };
 
   login = () => {
     auth.signInWithPopup(provider).then(result => {
@@ -103,7 +103,7 @@ class App extends Component {
         user
       });
     });
-  }
+  };
 
   handleRequest = e => {
     e.preventDefault();
@@ -156,18 +156,21 @@ class App extends Component {
   };
 
   render() {
-    return <Fragment>
+    return (
+      <Fragment>
         {/* <Header scroll={this.scrollToMyRef} /> */}
         <header ref={this.homeRef} className="header">
           {/* <img src={cocktail} alt="Cocktail glass logo" /> */}
-          {this.state.user ? <div className="login-container">
+          {this.state.user ? (
+            <div className="login-container">
               <p>{this.state.user.displayName}</p>
               <button className="login-button" onClick={this.logout}>
                 <i className="fas fa-sign-in-alt">
                   <span className="visuallyhidden">Log Out</span>
                 </i>
               </button>
-            </div> : // <button className="login-button" onClick={this.logout}>Log Out</button>
+            </div>
+          ) : (
             <div className="login-container">
               <p>Log In</p>
               <button className="login-button" onClick={this.login}>
@@ -176,44 +179,79 @@ class App extends Component {
                 </i>
               </button>
             </div>
-            // <button className="login-button" onClick={this.login}>Log In</button>
-          }
+          )}
           <h1>Bar Wizard</h1>
           <h2>A cocktail lookup app</h2>
           <form onSubmit={this.handleRequest} action="">
             <label htmlFor="searchRequest">Type in a cocktail drink</label>
-            <input onChange={this.handleChange} value={this.state.searchRequest} type="text" required={true} id="searchRequest" />
+            <input
+              onChange={this.handleChange}
+              value={this.state.searchRequest}
+              type="text"
+              required={true}
+              id="searchRequest"
+            />
             <input type="submit" value="Search" />
-            <button className="randomCocktail" type="button" onClick={this.handleRequest}>
+            <button
+              className="randomCocktail"
+              type="button"
+              onClick={this.handleRequest}
+            >
               Give me a random drink!
             </button>
           </form>
         </header>
 
-        <section className="results-section">
-          {this.state.showSearchCocktails ? (
+        {this.state.showSearchCocktails ? (
+          <section className="results-section">
             <CocktailList
               saveCocktail={this.saveCocktail}
               cocktails={this.state.cocktails}
               userState={this.state.user}
             />
-          ) : null}
-        </section>
+          </section>
+        ) : null}
 
-        <section ref={this.savedCocktailsRef} className="SavedDrinks">
-          {this.state.user ? <button onClick={this.logout}>
-              Log Out
-            </button> : <button onClick={this.login}>Log In</button>}
-          {this.state.user ? <div>
+        <section ref={this.savedCocktailsRef} className="favourites">
+          {this.state.user ? (
+            <div className="login-container">
+              <p>{this.state.user.displayName}</p>
+              <button className="login-button" onClick={this.logout}>
+                <i className="fas fa-sign-in-alt">
+                  <span className="visuallyhidden">Log Out</span>
+                </i>
+              </button>
+            </div>
+          ) : (
+            <div className="login-container">
+              <p>Log In</p>
+              <button className="login-button" onClick={this.login}>
+                <i className="fas fa-sign-in-alt">
+                  <span className="visuallyhidden">Log In</span>
+                </i>
+              </button>
+            </div>
+          )}
+          {this.state.user ? (
+            <div>
               <div className="user-profile">
+                <h3>{this.state.user.displayName}</h3>
                 <img src={this.state.user.photoURL} />
               </div>
-              <SavedList removeCocktail={this.removeCocktail} savedCocktails={this.state.savedCocktails || {}} />
-            </div> : <div className="wrapper">
+              <h2>Favourites</h2>
+              <SavedList
+                removeCocktail={this.removeCocktail}
+                savedCocktails={this.state.savedCocktails}
+              />
+            </div>
+          ) : (
+            <div className="wrapper">
               <p>You must be logged in to see saved cocktail drinks.</p>
-            </div>}
+            </div>
+          )}
         </section>
-      </Fragment>;
+      </Fragment>
+    );
   }
 }
 

@@ -8,6 +8,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    border-bottom: 15px solid $button-shades;
 
     // &-nav {
     //     border: 1px solid black;
@@ -42,28 +43,4 @@
     text-transform: uppercase;
     color: $light-shades;
     font-size: 2.5rem;
-}
-
-.login-container {
-    padding-top: 10%;
-    display: flex;
-    align-self: flex-end;
-    // justify-content: flex-end;
-    align-items: center;
-    // text-align: right;
-}
-
-.login-container p {
-    color: $light-shades;
-    padding-right: 10px;
-    text-transform: uppercase;
-    margin: 0;
-}
-
-.login-button {
-    color: $light-shades;
-    background: $button-shades;
-    border: none;
-    border-radius: 50%;
-    padding: 5px 10px;
 }

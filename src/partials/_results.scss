@@ -1,7 +1,6 @@
 .results-section {
     width: 100vw;
-    padding-left: 10vw;
-    padding-right: 10vw;
+    padding: 40px 10vw;
     margin: 0 auto;
     background: $light-shades;
     display: flex;
@@ -21,13 +20,16 @@
             display: flex;
             flex-direction: column;
             padding: 0 5%;
+
+            &:last-child {
+                border-bottom: none;
+            }
         }
     }
 }
 
 .results-section h2 {
     margin: 0;
-    padding-top: 40px;
     text-transform: uppercase;
     color: $dark-shades;
     font-size: 5rem;
@@ -66,13 +68,5 @@
     background: $light-accent;
     font-size: 2rem;
     padding: 10px 20px;
-    margin-bottom: 20px;
-}
-
-.ingredients-container {
-    display: flex;
-    // align-items: center;
-    justify-content: center;
-    flex-direction: column;
     margin-bottom: 20px;
 }
