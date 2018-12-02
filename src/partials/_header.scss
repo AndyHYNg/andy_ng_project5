@@ -11,8 +11,12 @@
   align-items: center;
   border-bottom: 15px solid $button-shades;
 
+  .emoji-logo {
+      align-self: flex-start;
+      font-size: 3rem;
+  }
+
   h1 {
-    padding-top: 3vh;
     margin: 0;
     text-transform: uppercase;
     color: $light-shades;

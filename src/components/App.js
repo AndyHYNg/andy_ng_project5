@@ -3,6 +3,7 @@ import React, { Component, Fragment } from "react";
 import CocktailList from "./Cocktail";
 import Favourites from "./List";
 import Header from "./Header";
+import Emoji from "./Emoji";
 
 /* METHODS */
 import axios from "axios";
@@ -151,7 +152,7 @@ class App extends Component {
     userDBRef.push(cocktailItem);
     swal({
       title: "Cocktail added!",
-      text: `'${cocktail.strDrink}' added to your Favourites!`,
+      text: `'${cocktail.strDrink}' added to your Favourites! 🍸`,
       icon: "success",
       button: "Sweeeeet!"
     });
@@ -197,10 +198,16 @@ class App extends Component {
                   </button>
                 </div>
               )}
+              <div className="emoji-logo">
+                <Emoji symbol="🍸" label="cocktail" />
+                <Emoji symbol="🧙‍" label="man mage" />
+              </div>
               <h1>Bar Wizard</h1>
               <h2>A cocktail lookup app</h2>
               <form onSubmit={this.handleRequest} action="">
-                <label className="visuallyhidden" htmlFor="searchRequest">Search text</label>
+                <label className="visuallyhidden" htmlFor="searchRequest">
+                  Search text
+                </label>
                 <input
                   placeholder="Ex. Margarita"
                   onChange={this.handleChange}
@@ -215,7 +222,7 @@ class App extends Component {
                   type="button"
                   onClick={this.handleRequest}
                 >
-                  I'm feeling adventurous
+                  Surprise me!
                 </button>
               </form>
             </section>
