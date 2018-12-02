@@ -3,6 +3,50 @@ import React, { Component, Fragment } from "react";
 // from uuid npm package
 const uuidv4 = require("uuid/v4");
 
+const Favourites = props => {
+  return (
+    <section className="favourites">
+      {console.log(props.userState)}
+      {props.userState ? (
+        <div className="login-container">
+          <p>{props.userState.displayName}</p>
+          <button className="login-button" onClick={props.logout}>
+            <i className="fas fa-sign-in-alt">
+              <span className="visuallyhidden">Log Out</span>
+            </i>
+          </button>
+        </div>
+      ) : (
+          <div className="login-container">
+            <p>Log In</p>
+            <button className="login-button" onClick={props.login}>
+              <i className="fas fa-sign-in-alt">
+                <span className="visuallyhidden">Log In</span>
+              </i>
+            </button>
+          </div>
+        )}
+      {props.userState ? (
+        <div>
+          <div className="user-profile">
+            <h3>{props.userState.displayName}</h3>
+            <img src={props.userState.photoURL} />
+          </div>
+          <h2>Favourites</h2>
+          <SavedList
+            removeCocktail={props.removeCocktail}
+            savedCocktails={props.savedCocktails}
+          />
+        </div>
+      ) : (
+          <div className="wrapper">
+            <p>You must be logged in to see saved cocktail drinks.</p>
+          </div>
+        )}
+    </section>
+  )
+}
+
 const SavedList = props => {
   return (
     <Fragment>
@@ -52,4 +96,5 @@ const SavedIngredient = props => {
   return <li>{props.ingredient}</li>;
 };
 
-export default SavedList;
+// export default SavedList;
+export default Favourites;

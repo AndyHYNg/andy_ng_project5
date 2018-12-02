@@ -1,7 +1,7 @@
 /* COMPONENTS */
 import React, { Component, Fragment } from "react";
 import CocktailList from "./Cocktail";
-import SavedList from "./List";
+import Favourites from "./List";
 import Header from "./Header";
 
 /* METHODS */
@@ -16,14 +16,14 @@ import cocktail from "../cocktail.png";
 class App extends Component {
   constructor() {
     super();
-    this.homeRef = React.createRef();
-    this.savedCocktailsRef = React.createRef();
     this.state = {
       user: null, // for Google auth
       searchRequest: "",
       cocktails: [],
       savedCocktails: {},
-      showSearchCocktails: false
+      showSearchCocktails: false,
+      showMainPage: false,
+      showFavourites: false
     };
   }
 
@@ -159,8 +159,7 @@ class App extends Component {
     return (
       <Fragment>
         {/* <Header scroll={this.scrollToMyRef} /> */}
-        <header ref={this.homeRef} className="header">
-          {/* <img src={cocktail} alt="Cocktail glass logo" /> */}
+        <header className="header">
           {this.state.user ? (
             <div className="login-container">
               <p>{this.state.user.displayName}</p>
@@ -212,44 +211,13 @@ class App extends Component {
           </section>
         ) : null}
 
-        <section ref={this.savedCocktailsRef} className="favourites">
-          {this.state.user ? (
-            <div className="login-container">
-              <p>{this.state.user.displayName}</p>
-              <button className="login-button" onClick={this.logout}>
-                <i className="fas fa-sign-in-alt">
-                  <span className="visuallyhidden">Log Out</span>
-                </i>
-              </button>
-            </div>
-          ) : (
-            <div className="login-container">
-              <p>Log In</p>
-              <button className="login-button" onClick={this.login}>
-                <i className="fas fa-sign-in-alt">
-                  <span className="visuallyhidden">Log In</span>
-                </i>
-              </button>
-            </div>
-          )}
-          {this.state.user ? (
-            <div>
-              <div className="user-profile">
-                <h3>{this.state.user.displayName}</h3>
-                <img src={this.state.user.photoURL} />
-              </div>
-              <h2>Favourites</h2>
-              <SavedList
-                removeCocktail={this.removeCocktail}
-                savedCocktails={this.state.savedCocktails}
-              />
-            </div>
-          ) : (
-            <div className="wrapper">
-              <p>You must be logged in to see saved cocktail drinks.</p>
-            </div>
-          )}
-        </section>
+        <Favourites
+          savedCocktails={this.state.savedCocktails}
+          removeCocktail={this.removeCocktail}
+          userState={this.state.user}
+          login={this.login}
+          logout={this.logout}
+        />
       </Fragment>
     );
   }
