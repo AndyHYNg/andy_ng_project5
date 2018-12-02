@@ -1,0 +1,37 @@
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-size: 2rem;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+h1 {
+    padding-top: 20vh;
+    margin: 0;
+    text-transform: uppercase;
+    color: $light-shades;
+    font-size: 4rem;
+}
+
+h2 {
+    margin: 0;
+    text-transform: uppercase;
+    color: $light-shades;
+    font-size: 2rem;
+}

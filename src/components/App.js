@@ -1,14 +1,22 @@
+/* COMPONENTS */
 import React, { Component, Fragment } from "react";
-import "./App.css";
 import CocktailList from "./Cocktail";
 import SavedList from "./List";
-import cocktail from "./cocktail.png";
+import Header from "./Header";
+
+/* METHODS */
 import axios from "axios";
-import firebase, { auth, provider } from "./firebase";
+import firebase, { auth, provider } from "../firebase";
+
+/* STYLES AND IMAGES */
+import "../App.scss";
+import cocktail from "../cocktail.png";
 
 class App extends Component {
   constructor() {
     super();
+    this.homeRef = React.createRef();
+    this.savedCocktailsRef = React.createRef();
     this.state = {
       user: null, // for Google auth
       searchRequest: "",
@@ -72,13 +80,20 @@ class App extends Component {
     });
   }
 
+  scrollToMyRef = (e) => {
+    window.scrollTo({
+      top: this.myRef.current.offsetTop,
+      behavior: "smooth"
+    })
+  }
+
   logout = () => {
     auth.signOut().then(() => {
       this.setState({
         user: null
       });
     });
-  };
+  }
 
   login = () => {
     auth.signInWithPopup(provider).then(result => {
@@ -87,7 +102,7 @@ class App extends Component {
         user
       });
     });
-  };
+  }
 
   handleRequest = e => {
     e.preventDefault();
@@ -131,10 +146,28 @@ class App extends Component {
   render() {
     return (
       <Fragment>
-        <div className="App">
-          <header />
-          <h1>Cocktail Lookup</h1>
-          <img src={cocktail} alt="Cocktail glass" />
+        {/* <Header scroll={this.scrollToMyRef} /> */}
+        <header ref={this.homeRef} className="header">
+          {/* <img src={cocktail} alt="Cocktail glass logo" /> */}
+          {this.state.user ? (
+              <div className="login-container">
+                <p>{this.state.user.displayName}</p>
+                <button className="login-button" onClick={this.logout}>
+                  <i className="fas fa-sign-in-alt"><span className="visuallyhidden">Log Out</span></i>
+                </button>
+              </div>
+            // <button className="login-button" onClick={this.logout}>Log Out</button>
+          ) : ( 
+              <div className="login-container">              
+                <p>Log In</p>
+                <button className="login-button" onClick={this.login}>
+                  <i className="fas fa-sign-in-alt"><span className="visuallyhidden">Log In</span></i>
+                </button>
+              </div>
+              // <button className="login-button" onClick={this.login}>Log In</button>
+            )}
+          <h1>Bar Wizard</h1>
+          <h2>A cocktail lookup app</h2>
           <form onSubmit={this.handleRequest} action="">
             <label htmlFor="searchRequest">Type in a cocktail drink</label>
             <input
@@ -152,6 +185,9 @@ class App extends Component {
               Give me a random drink!
             </button>
           </form>
+        </header>
+
+        <section>
           {this.state.showSearchCocktails ? (
             <CocktailList
               saveCocktail={this.saveCocktail}
@@ -159,9 +195,9 @@ class App extends Component {
               userState={this.state.user}
             />
           ) : null}
-        </div>
+        </section>
 
-        <div className="SavedDrinks">
+        <section ref={this.savedCocktailsRef} className="SavedDrinks">
           {this.state.user ? (
             <button onClick={this.logout}>Log Out</button>
           ) : (
@@ -179,7 +215,7 @@ class App extends Component {
               <p>You must be logged in to see saved cocktail drinks.</p>
             </div>
           )}
-        </div>
+        </section>
       </Fragment>
     );
   }

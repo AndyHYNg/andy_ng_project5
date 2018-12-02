@@ -1,0 +1,53 @@
+.header {
+    width: 100vw;
+    padding-left: 10vw;
+    padding-right: 10vw;
+    height: 100vh;
+    margin: 0 auto;
+    background: $dark-shades;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    // &-nav {
+    //     border: 1px solid black;
+    //     width: 100vw;
+    //     position: fixed;
+    //     bottom: 0;
+    //     left: 0;
+    // }
+
+    // &-nav ul {
+    //     display: flex;
+    //     justify-content: space-between;
+    // }
+
+    // &-nav-item {
+    //     width: calc(100% / 3);
+    //     padding: 10px 20px;
+    // }
+}
+
+.login-container {
+    padding-top: 10%;
+    display: flex;
+    align-self: flex-end;
+    // justify-content: flex-end;
+    align-items: center;
+    // text-align: right;
+}
+
+.login-container p {
+    color: $light-shades;
+    padding-right: 10px;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.login-button {
+    color: $light-shades;
+    background: $button-shades;
+    border: none;
+    border-radius: 50%;
+    padding: 5px 10px;
+}
