@@ -10,7 +10,6 @@ const CocktailList = props => {
     <section id="results" className="results-section">
       <h2>Search Results</h2>
       <div className="results-section-cocktails">
-        {console.log(props.cocktails)}
         {props.cocktails.length === 0 ? (<p>No results. Try searching again!</p>) : ( 
         props.cocktails.map(currCocktail => {
           return (

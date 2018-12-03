@@ -18,7 +18,6 @@ import "../App.scss";
 class App extends Component {
   constructor() {
     super();
-    // this.resultsRef = React.createRef();
     this.state = {
       user: null, // for Google auth
       searchRequest: "",
@@ -134,8 +133,6 @@ class App extends Component {
       searchRequest: "",
       showSearchCocktails: true
     });
-    // this.resultsRef.current.scrollIntoView({behavior: 'smooth'});
-    // setTimeout(document.getElementById("results").scrollIntoView(), 800);
   };
 
   // save user's text input to
@@ -182,7 +179,9 @@ class App extends Component {
   render() {
     return (
       <Fragment>
-        <a href='#main-content' className='skip-link'>Skip to main content</a>
+        <a href="#main-content" className="skip-link">
+          Skip to main content
+        </a>
         <Navbar togglePage={this.togglePage} />
         <main id="main-content">
           {this.state.showMainPage ? (
@@ -218,6 +217,8 @@ class App extends Component {
                     Search text
                   </label>
                   <input
+                    aria-label="search text box"
+                    aria-required="true"
                     placeholder="Ex. Margarita"
                     onChange={this.handleChange}
                     value={this.state.searchRequest}
@@ -239,11 +240,11 @@ class App extends Component {
           ) : null}
 
           {this.state.showSearchCocktails && this.state.showMainPage ? (
-              <CocktailList
-                saveCocktail={this.saveCocktail}
-                cocktails={this.state.cocktails}
-                userState={this.state.user}
-              />
+            <CocktailList
+              saveCocktail={this.saveCocktail}
+              cocktails={this.state.cocktails}
+              userState={this.state.user}
+            />
           ) : null}
 
           {this.state.showFavourites ? (
