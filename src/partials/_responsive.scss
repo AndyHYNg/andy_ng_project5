@@ -1,0 +1,49 @@
+@media (min-width: 394px) {
+
+    .search-section {
+        .emoji-logo {
+            margin-top: 15vh;
+            align-self: center;
+        }
+    }
+}
+
+@media (min-width: 450px) {
+
+    .results-section {
+        button {
+            width: 80%;
+        }
+    }
+
+    .saved-list-container {
+        button {
+            width: 80%;
+        }
+    }
+}
+
+@media (min-width: 600px) {
+
+    // form {
+    //     input[]
+    // }
+
+    .results-section-cocktails > div, 
+    .favourites .saved-list-drink {
+        justify-content: space-between;
+        width: 50%;
+    }
+
+    .favourites .user-profile img {
+        width: 75%;
+    }
+
+    .results-section-cocktails > div:last-child {
+        border-bottom: 5px solid $dark-shades;
+    }
+
+    .saved-list-drink:last-child {
+        border-bottom: 5px solid $light-shades;
+    }
+}

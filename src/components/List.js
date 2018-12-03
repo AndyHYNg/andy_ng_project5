@@ -49,7 +49,7 @@ const Favourites = props => {
 
 const SavedList = props => {
   return (
-    <Fragment>
+    <div className="saved-list-container">
       {props.savedCocktails ? (
         Object.entries(props.savedCocktails).map(currCocktail => {
           return (
@@ -63,13 +63,13 @@ const SavedList = props => {
       ) : (
         <p>You do not have any saved cocktails.</p>
       )}
-    </Fragment>
+    </div>
   );
 };
 
 const SavedCocktail = props => {
   return (
-    <div className="saved-list-container">
+    <div className="saved-list-drink">
       <h4>{props.cocktail[1].name}</h4>
       <img src={props.cocktail[1].thumbnail} alt={props.cocktail[1].name} />
       <div className="ingredients-container">
