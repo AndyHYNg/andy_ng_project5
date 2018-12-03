@@ -18,6 +18,7 @@ import "../App.scss";
 class App extends Component {
   constructor() {
     super();
+    // this.resultsRef = React.createRef();
     this.state = {
       user: null, // for Google auth
       searchRequest: "",
@@ -133,6 +134,7 @@ class App extends Component {
       searchRequest: "",
       showSearchCocktails: true
     });
+    // this.resultsRef.current.scrollIntoView({behavior: 'smooth'});
   };
 
   // save user's text input to
@@ -179,7 +181,7 @@ class App extends Component {
   render() {
     return (
       <Fragment>
-        <a href='#main-content' class='skip-link'>Skip to main content</a> {/*test this*/}
+        <a href='#main-content' className='skip-link'>Skip to main content</a>
         <Navbar togglePage={this.togglePage} />
         <main id="main-content">
           {this.state.showMainPage ? (

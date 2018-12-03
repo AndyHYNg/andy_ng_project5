@@ -10,7 +10,9 @@ const CocktailList = props => {
     <section className="results-section">
       <h2>Search Results</h2>
       <div className="results-section-cocktails">
-        {props.cocktails.map(currCocktail => {
+        {console.log(props.cocktails)}
+        {props.cocktails.length === 0 ? (<p>No results. Try searching again!</p>) : ( 
+        props.cocktails.map(currCocktail => {
           return (
             <SingleCocktail
               key={currCocktail.idDrink}
@@ -19,7 +21,7 @@ const CocktailList = props => {
               saveCocktail={props.saveCocktail}
             />
           );
-        })}
+        }))}
       </div>
     </section>
   );
