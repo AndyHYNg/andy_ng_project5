@@ -36,8 +36,8 @@ const SingleCocktail = props => {
   }
   return (
     <div key={props.cocktail.idDrink}>
-      <h3>{props.cocktail.strDrink}</h3>
       <img src={props.cocktail.strDrinkThumb} alt={props.cocktail.strDrink} />
+      <h3>{props.cocktail.strDrink}</h3>
       <div className="ingredients-container">
         <h4>Ingredients</h4>
         <ul>

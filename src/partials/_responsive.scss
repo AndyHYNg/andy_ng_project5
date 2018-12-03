@@ -1,4 +1,4 @@
-@media (min-height: 320px) and (min-width: 480px) {
+@media all and (max-height: 500px) and (orientation: landscape) {
     .search-section {
         min-height: calc(100vh + 150px);
     }
@@ -19,16 +19,9 @@
         width: 90%;
     }
 
-    .results-section {
-        button {
-            width: 80%;
-        }
-    }
-
-    .saved-list-container {
-        button {
-            width: 80%;
-        }
+    .results-section button, 
+    .saved-list-container button {
+        width: 80%;
     }
 }
 
@@ -55,4 +48,75 @@
     .saved-list-drink:last-child {
         border-bottom: 5px solid $light-shades;
     }
+}
+
+@media (min-width: 768px) {
+
+    .search-section {
+        background: linear-gradient(to right, rgba(54, 60, 77, 0.5), rgba(54, 60, 77, 0.5)), url("./assets/bar-counter.jpg");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .login-container {
+        margin-top: 75px;
+    }
+    
+    .favourites .user-profile img {
+        width: 50%;
+    }
+
+    .center-search-container {
+        width: 60%;
+    }
+
+    .fixed-nav-container {
+        background: $button-shades;
+        top: 0;
+        bottom: auto;
+        // justify-content: space-between;
+        padding: 2% 10vw 2%;
+        
+        .nav-emoji-logo {
+            display: flex;
+            width: 50%;
+
+            h5 {
+                text-transform: uppercase;
+                margin: 0;
+                color: $light-shades;
+                font-size: 2.5rem;
+            }
+
+            span {
+                font-size: 2.5rem;
+            }
+        }
+
+        .fixed-nav {
+            width: 35%;
+        }
+        
+        ul {
+            justify-content: flex-end;
+
+            button {
+                padding-top: 0;
+                padding-bottom: 0;
+                background: $button-shades;
+                text-transform: uppercase;
+                font-size: 2.5rem;
+            }
+        }
+
+        .fixed-nav-item {
+            width: 50%;
+        }
+
+        i {
+            display: none;
+        }
+    }
+
 }
