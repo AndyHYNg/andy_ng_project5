@@ -1,122 +1,177 @@
 @media all and (max-height: 500px) and (orientation: landscape) {
-    .search-section {
-        min-height: calc(100vh + 150px);
-    }
+  .search-section {
+    min-height: calc(100vh + 150px);
+  }
 }
 
 @media (min-width: 394px) {
-
-    .search-section {
-        .emoji-logo {
-            margin-top: 10vh;
-        }
+  .search-section {
+    .emoji-logo {
+      margin-top: 10vh;
     }
+  }
 }
 
 @media (min-width: 450px) {
+  .center-search-container {
+    width: 90%;
+  }
 
-    .center-search-container {
-        width: 90%;
-    }
-
-    .results-section button, 
-    .saved-list-container button {
-        width: 80%;
-    }
+  .results-section button,
+  .saved-list-container button {
+    width: 80%;
+  }
 }
 
 @media (min-width: 600px) {
+  .center-search-container {
+    width: 70%;
+  }
 
-    .center-search-container {
-        width: 70%;
-    }
+  .results-section-cocktails {
+    margin-top: 50px;
+  }
 
-    .results-section-cocktails > div, 
-    .favourites .saved-list-drink {
-        justify-content: space-between;
-        width: 50%;
-    }
+  .results-section h2 {
+    line-height: 1.4;
+  }
 
-    .favourites .user-profile img {
-        width: 75%;
-    }
+  .results-section-cocktails > div,
+  .favourites .saved-list-drink {
+    justify-content: space-between;
+    width: 50%;
+  }
 
-    .results-section-cocktails > div:last-child {
-        border-bottom: 5px solid $dark-shades;
-    }
+  .favourites .user-profile img {
+    width: 75%;
+  }
 
-    .saved-list-drink:last-child {
-        border-bottom: 5px solid $light-shades;
-    }
+  .results-section-cocktails > div:last-child {
+    border-bottom: 5px solid $dark-shades;
+  }
+
+  .saved-list-drink:last-child {
+    border-bottom: 5px solid $light-shades;
+  }
 }
 
 @media (min-width: 768px) {
+  .search-section {
+    background: linear-gradient(
+        to right,
+        rgba(54, 60, 77, 0.8),
+        rgba(54, 60, 77, 0.8)
+      ),
+      url("./assets/bar-counter.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: center;
 
-    .search-section {
-        background: linear-gradient(to right, rgba(54, 60, 77, 0.5), rgba(54, 60, 77, 0.5)), url("./assets/bar-counter.jpg");
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
+    span {
+      font-size: 4rem;
     }
 
-    .login-container {
-        margin-top: 75px;
-    }
-    
-    .favourites .user-profile img {
-        width: 50%;
+    h1 {
+      font-size: 8rem;
     }
 
-    .center-search-container {
-        width: 60%;
+    h2 {
+      font-size: 3rem;
+    }
+  }
+
+  .login-container {
+    margin-top: 75px;
+  }
+
+  .favourites .user-profile img {
+    width: 50%;
+  }
+
+  .center-search-container {
+    width: 60%;
+  }
+
+  .fixed-nav-container {
+    background: $button-shades;
+    top: 0;
+    bottom: auto;
+    // justify-content: space-between;
+    padding: 2% 10vw 2%;
+
+    .nav-emoji-logo {
+      display: flex;
+      width: 50%;
+
+      h5 {
+        text-transform: uppercase;
+        margin: 0;
+        color: $light-shades;
+        font-size: 2.5rem;
+      }
+
+      span {
+        font-size: 2.5rem;
+      }
     }
 
-    .fixed-nav-container {
+    .fixed-nav {
+      width: 35%;
+    }
+
+    ul {
+      justify-content: flex-end;
+
+      button {
+        padding-top: 0;
+        padding-bottom: 0;
         background: $button-shades;
-        top: 0;
-        bottom: auto;
-        // justify-content: space-between;
-        padding: 2% 10vw 2%;
-        
-        .nav-emoji-logo {
-            display: flex;
-            width: 50%;
-
-            h5 {
-                text-transform: uppercase;
-                margin: 0;
-                color: $light-shades;
-                font-size: 2.5rem;
-            }
-
-            span {
-                font-size: 2.5rem;
-            }
-        }
-
-        .fixed-nav {
-            width: 35%;
-        }
-        
-        ul {
-            justify-content: flex-end;
-
-            button {
-                padding-top: 0;
-                padding-bottom: 0;
-                background: $button-shades;
-                text-transform: uppercase;
-                font-size: 2.5rem;
-            }
-        }
-
-        .fixed-nav-item {
-            width: 50%;
-        }
-
-        i {
-            display: none;
-        }
+        text-transform: uppercase;
+        font-size: 2.5rem;
+      }
     }
 
+    .fixed-nav-item {
+      width: 50%;
+    }
+
+    i {
+      display: none;
+    }
+  }
+}
+
+@media (min-width: 1080px) {
+  .search-section form button,
+  .search-section form input[type="submit"] {
+    width: 60%;
+  }
+}
+
+@media (min-width: 1180px) {
+
+      .favourites .user-profile img {
+    width: 30%;
+  }
+
+  .search-section form input[type="text"] {
+    width: 75%;
+  }
+
+  .search-section form button,
+  .search-section form input[type="submit"] {
+    width: 50%;
+  }
+}
+
+@media (min-width: 1400px) {
+  .search-section form input[type="text"] {
+    width: 60%;
+  }
+
+  .search-section form button,
+  .search-section form input[type="submit"] {
+    width: 40%;
+  }
 }

@@ -70,8 +70,8 @@ const SavedList = props => {
 const SavedCocktail = props => {
   return (
     <div className="saved-list-drink">
-      <h4>{props.cocktail[1].name}</h4>
       <img src={props.cocktail[1].thumbnail} alt={props.cocktail[1].name} />
+      <h4>{props.cocktail[1].name}</h4>
       <div className="ingredients-container">
         <h5>Ingredients</h5>
         <ul>

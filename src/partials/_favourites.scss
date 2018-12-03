@@ -3,6 +3,8 @@
   width: 100%;
   min-height: 100vh;
   min-width: 320px;
+  max-width: 1920px;
+  margin: 0 auto;
   padding: 0 10vw 100px 10vw;
   display: flex;
   flex-direction: column;
@@ -20,18 +22,20 @@
 
   h2 {
     margin-top: 20px;
+    margin-bottom: 0;
     text-transform: uppercase;
     color: $light-shades;
-    font-size: 3.5rem;
+    font-size: 4rem;
     line-height: 1;
     border-bottom: 5px solid $light-shades;
   }
 
   h3 {
     margin-top: 20px;
+    margin-bottom: 10px;
     text-transform: uppercase;
     color: $light-shades;
-    font-size: 4rem;
+    font-size: 5rem;
     line-height: 2;
     border-bottom: 5px solid $light-shades;
     text-align: center;
@@ -39,6 +43,7 @@
   }
 
   h4 {
+    margin-bottom: 0;
     text-align: center;
     color: $light-shades;
     text-transform: uppercase;
@@ -64,6 +69,7 @@
 }
 
 .saved-list-drink {
+  margin-top: 50px;
   padding: 0 5%;
   width: 100%;
   display: flex;
