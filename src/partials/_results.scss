@@ -1,82 +1,87 @@
 // SEARCH RESULTS SECTIONS STYLES
 
 .results-section {
-    width: 100%;
-    padding: 40px 10vw 100px;
-    min-width: 320px;
-    max-width: 1920px;
-    margin: 0 auto;
-    background: $light-shades;
+  width: 100%;
+  padding: 40px 10vw 100px;
+  min-width: 320px;
+  max-width: 1920px;
+  margin: 0 auto;
+  background: $light-shades;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  p {
+    margin-top: 80px;
+    color: $dark-shades;
+  }
+
+  &-cocktails {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
 
-    p {
-        margin-top: 80px;
-        color: $dark-shades;
+    & > div {
+      margin-top: 50px;
+      border-bottom: 5px solid $dark-shades;
+      display: flex;
+      flex-direction: column;
+      padding: 0 5%;
+
+      &:last-child {
+        border-bottom: none;
+      }
     }
-
-    &-cocktails {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-
-        & > div {
-            margin-top: 50px;
-            border-bottom: 5px solid $dark-shades;
-            display: flex;
-            flex-direction: column;
-            padding: 0 5%;
-
-            &:last-child {
-                border-bottom: none;
-            }
-        }
-    }
+  }
 }
 
 .results-section h2 {
-    margin: 0;
-    text-transform: uppercase;
-    color: $dark-shades;
-    font-size: 5rem;
-    line-height: 1;
-    border-bottom: 5px solid $dark-shades;
-    align-self: flex-start;
-    width: 100%;
+  margin: 0;
+  text-transform: uppercase;
+  color: $dark-shades;
+  font-size: 5rem;
+  line-height: 1;
+  border-bottom: 5px solid $dark-shades;
+  align-self: flex-start;
+  width: 100%;
 }
 
 .results-section h3 {
-    margin-bottom: 0;
-    text-align: center;
-    color: $dark-shades;
-    text-transform: uppercase;
-    font-size: 3rem;
+  margin-bottom: 0;
+  text-align: center;
+  color: $dark-shades;
+  text-transform: uppercase;
+  font-size: 3rem;
 }
 
 .results-section h4 {
-    font-size: 2.5rem;
-    color: $dark-shades;
+  font-size: 2.5rem;
+  color: $dark-shades;
 }
 
 .results-section li {
-    font-size: 2rem;
-    color: $dark-shades; 
+  font-size: 2rem;
+  color: $dark-shades;
 }
 
 .results-section img {
-    border-radius: 50%;
-    box-shadow: 0px 5px 15px $dark-accent;
+  border-radius: 50%;
+  box-shadow: 0px 5px 15px $dark-accent;
 }
 
 .results-section button {
-    align-self: center;
-    width: 100%;
-    border: none;
-    border-radius: 10px;
-    color: $light-shades;
-    background: $light-accent;
-    font-size: 2rem;
-    padding: 10px 20px;
-    margin-bottom: 30px;
+  align-self: center;
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  color: $light-shades;
+  background: $light-accent;
+  font-size: 2rem;
+  padding: 10px 20px;
+  margin-bottom: 30px;
+
+  &:hover,
+  &:focus {
+    background: $main-color;
+  }
 }

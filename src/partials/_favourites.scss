@@ -92,6 +92,11 @@
     font-size: 2rem;
     padding: 10px 20px;
     margin-bottom: 20px;
+
+    &:hover,
+    &:focus {
+      background: $main-color;
+    }
   }
 
   img {

@@ -135,6 +135,7 @@ class App extends Component {
       showSearchCocktails: true
     });
     // this.resultsRef.current.scrollIntoView({behavior: 'smooth'});
+    // setTimeout(document.getElementById("results").scrollIntoView(), 800);
   };
 
   // save user's text input to

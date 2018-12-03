@@ -43,6 +43,10 @@
       border: none;
       padding: 10px 15px;
       border-radius: 10px;
+
+      &:focus {
+        box-shadow: 0 0 0 3px $light-accent;
+      }
     }
 
     input[type="submit"],
@@ -55,6 +59,11 @@
       font-size: 2rem;
       padding: 10px 20px;
       margin-top: 10px;
+
+      &:hover,
+      &:focus {
+        background: $main-color;
+      }
     }
   }
 }
