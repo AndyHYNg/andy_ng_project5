@@ -3,9 +3,11 @@ import React, { Fragment } from "react";
 // from uuid npm package
 const uuidv4 = require("uuid/v4");
 
+// search results cocktail component
+
 const CocktailList = props => {
   return (
-    <Fragment>
+    <section className="results-section">
       <h2>Search Results</h2>
       <div className="results-section-cocktails">
         {props.cocktails.map(currCocktail => {
@@ -19,7 +21,7 @@ const CocktailList = props => {
           );
         })}
       </div>
-    </Fragment>
+    </section>
   );
 };
 

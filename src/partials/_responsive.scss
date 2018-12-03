@@ -1,3 +1,5 @@
+// RESPONSIVE STYLES
+
 @media all and (max-height: 500px) and (orientation: landscape) {
   .search-section {
     min-height: calc(100vh + 150px);
@@ -98,7 +100,6 @@
     background: $button-shades;
     top: 0;
     bottom: auto;
-    // justify-content: space-between;
     padding: 2% 10vw 2%;
 
     .nav-emoji-logo {
@@ -151,15 +152,14 @@
 }
 
 @media (min-width: 1180px) {
-
-      .favourites .user-profile img {
+  .favourites .user-profile img {
     width: 30%;
   }
 
   .search-section span {
-      font-size: 6rem;
+    font-size: 6rem;
   }
-  
+
   .search-section form input[type="text"] {
     width: 75%;
   }

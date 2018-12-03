@@ -1,3 +1,5 @@
+// SEARCH RESULTS SECTIONS STYLES
+
 .results-section {
     width: 100%;
     padding: 40px 10vw 100px;
@@ -7,12 +9,10 @@
     background: $light-shades;
     display: flex;
     flex-direction: column;
-    // justify-content: center;
     align-items: center;
 
 
     &-cocktails {
-        // margin-top: 50px;
         display: flex;
         flex-wrap: wrap;
         justify-content: center;

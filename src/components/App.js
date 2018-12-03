@@ -10,8 +10,10 @@ import axios from "axios";
 import firebase, { auth, provider } from "../firebase";
 import swal from "sweetalert";
 
-/* STYLES AND IMAGES */
+/* CSS STYLES */
 import "../App.scss";
+
+// main app component
 
 class App extends Component {
   constructor() {
@@ -27,6 +29,7 @@ class App extends Component {
     };
   }
 
+  // toggle between main page and favourites page render
   togglePage = e => {
     e.preventDefault();
     if (this.state[e.target.id] === false) {
@@ -45,6 +48,7 @@ class App extends Component {
     }
   };
 
+  // axios API get
   getCocktail = e => {
     if (e.target.className === "randomCocktail") {
       return axios
@@ -55,7 +59,7 @@ class App extends Component {
         })
         .then(res => {
           this.setState({
-            cocktails: res.data.drinks || [] // need to set this for edge case
+            cocktails: res.data.drinks || []
           });
         });
     } else if (this.state.searchRequest === "") {
@@ -67,7 +71,7 @@ class App extends Component {
         })
         .then(res => {
           this.setState({
-            cocktails: res.data.drinks || [] // need to set this for edge case
+            cocktails: res.data.drinks || []
           });
         });
     } else {
@@ -79,12 +83,13 @@ class App extends Component {
         })
         .then(res => {
           this.setState({
-            cocktails: res.data.drinks || [] // need to set this for edge case
+            cocktails: res.data.drinks || []
           });
         });
     }
   };
 
+  // on component mount, check if user state is logged in, if so get snapshot of the db relative to user's uid
   componentDidMount() {
     auth.onAuthStateChanged(user => {
       if (user) {
@@ -99,13 +104,7 @@ class App extends Component {
     });
   }
 
-  scrollToMyRef = e => {
-    window.scrollTo({
-      top: this.myRef.current.offsetTop,
-      behavior: "smooth"
-    });
-  };
-
+  // firebase user logout only, note it does not log off of user's Google account
   logout = () => {
     auth.signOut().then(() => {
       this.setState({
@@ -114,6 +113,7 @@ class App extends Component {
     });
   };
 
+  // firebase user login, also logs the user's Google account
   login = () => {
     auth.signInWithPopup(provider).then(result => {
       const user = result.user;
@@ -123,6 +123,7 @@ class App extends Component {
     });
   };
 
+  // handle form submission
   handleRequest = e => {
     e.preventDefault();
     // invoke axios request
@@ -134,12 +135,14 @@ class App extends Component {
     });
   };
 
+  // save user's text input to
   handleChange = e => {
     this.setState({
       [e.target.id]: e.target.value
     });
   };
 
+  // method to save selected cocktail to user's favourite list
   saveCocktail = (cocktail, cocktailIngredients) => {
     const cocktailItem = {
       id: cocktail.idDrink,
@@ -158,6 +161,7 @@ class App extends Component {
     });
   };
 
+  // method to remove selected cocktail from user's favourite list
   removeCocktail = e => {
     const firebaseKey = e.target.id;
     const cocktailDBRef = firebase
@@ -175,8 +179,9 @@ class App extends Component {
   render() {
     return (
       <Fragment>
+        <a href='#main-content' class='skip-link'>Skip to main content</a> {/*test this*/}
         <Navbar togglePage={this.togglePage} />
-        <main>
+        <main id="main-content">
           {this.state.showMainPage ? (
             <section className="search-section">
               {this.state.user ? (
@@ -231,13 +236,11 @@ class App extends Component {
           ) : null}
 
           {this.state.showSearchCocktails && this.state.showMainPage ? (
-            <section className="results-section">
               <CocktailList
                 saveCocktail={this.saveCocktail}
                 cocktails={this.state.cocktails}
                 userState={this.state.user}
               />
-            </section>
           ) : null}
 
           {this.state.showFavourites ? (

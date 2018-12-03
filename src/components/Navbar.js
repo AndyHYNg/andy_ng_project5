@@ -1,6 +1,8 @@
 import React, { Fragment } from "react";
 import Emoji from "./Emoji";
 
+// Navbar Component
+
 const Navbar = props => {
   return (
     <Fragment>

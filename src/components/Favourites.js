@@ -3,6 +3,8 @@ import React, { Fragment } from "react";
 // from uuid npm package
 const uuidv4 = require("uuid/v4");
 
+// favourites list component
+
 const Favourites = props => {
   return (
     <section className="favourites">

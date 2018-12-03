@@ -1,3 +1,5 @@
+// GLOBAL STYLES
+
 html {
     font-family: Arial, sans-serif;
     font-size: 62.5%;
@@ -26,9 +28,7 @@ a {
     padding-top: 5%;
     display: flex;
     align-self: flex-end;
-    // justify-content: flex-end;
     align-items: center;
-    // text-align: right;
 }
 
 .login-container p {
@@ -48,7 +48,6 @@ a {
 
 .ingredients-container {
     display: flex;
-    // align-items: center;
     justify-content: center;
     flex-direction: column;
     margin-bottom: 20px;
