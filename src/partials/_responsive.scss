@@ -1,14 +1,23 @@
+@media (min-height: 320px) and (min-width: 480px) {
+    .search-section {
+        min-height: calc(100vh + 150px);
+    }
+}
+
 @media (min-width: 394px) {
 
     .search-section {
         .emoji-logo {
-            margin-top: 15vh;
-            align-self: center;
+            margin-top: 10vh;
         }
     }
 }
 
 @media (min-width: 450px) {
+
+    .center-search-container {
+        width: 90%;
+    }
 
     .results-section {
         button {
@@ -25,9 +34,9 @@
 
 @media (min-width: 600px) {
 
-    // form {
-    //     input[]
-    // }
+    .center-search-container {
+        width: 70%;
+    }
 
     .results-section-cocktails > div, 
     .favourites .saved-list-drink {

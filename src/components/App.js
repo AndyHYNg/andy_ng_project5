@@ -198,33 +198,35 @@ class App extends Component {
                   </button>
                 </div>
               )}
-              <div className="emoji-logo">
-                <Emoji symbol="🍸" label="cocktail" />
-                <Emoji symbol="🧙‍" label="man mage" />
+              <div className="center-search-container">
+                <div className="emoji-logo">
+                  <Emoji symbol="🍸" label="cocktail" />
+                  <Emoji symbol="🧙‍" label="man mage" />
+                </div>
+                <h1>Bar Wizard</h1>
+                <h2>A cocktail lookup app</h2>
+                <form onSubmit={this.handleRequest} action="">
+                  <label className="visuallyhidden" htmlFor="searchRequest">
+                    Search text
+                  </label>
+                  <input
+                    placeholder="Ex. Margarita"
+                    onChange={this.handleChange}
+                    value={this.state.searchRequest}
+                    type="text"
+                    required={true}
+                    id="searchRequest"
+                  />
+                  <input type="submit" value="Search" />
+                  <button
+                    className="randomCocktail"
+                    type="button"
+                    onClick={this.handleRequest}
+                  >
+                    Surprise me!
+                  </button>
+                </form>
               </div>
-              <h1>Bar Wizard</h1>
-              <h2>A cocktail lookup app</h2>
-              <form onSubmit={this.handleRequest} action="">
-                <label className="visuallyhidden" htmlFor="searchRequest">
-                  Search text
-                </label>
-                <input
-                  placeholder="Ex. Margarita"
-                  onChange={this.handleChange}
-                  value={this.state.searchRequest}
-                  type="text"
-                  required={true}
-                  id="searchRequest"
-                />
-                <input type="submit" value="Search" />
-                <button
-                  className="randomCocktail"
-                  type="button"
-                  onClick={this.handleRequest}
-                >
-                  Surprise me!
-                </button>
-              </form>
             </section>
           ) : null}
 
