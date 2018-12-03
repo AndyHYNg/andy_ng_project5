@@ -83,6 +83,7 @@
 
   .login-container {
     margin-top: 75px;
+    font-size: 2.3rem;
   }
 
   .favourites .user-profile img {
@@ -155,6 +156,10 @@
     width: 30%;
   }
 
+  .search-section span {
+      font-size: 6rem;
+  }
+  
   .search-section form input[type="text"] {
     width: 75%;
   }

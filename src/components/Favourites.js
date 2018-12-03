@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Fragment } from "react";
 
 // from uuid npm package
 const uuidv4 = require("uuid/v4");

@@ -1,8 +1,8 @@
 /* COMPONENTS */
 import React, { Component, Fragment } from "react";
 import CocktailList from "./Cocktail";
-import Favourites from "./List";
-import Header from "./Header";
+import Favourites from "./Favourites";
+import Navbar from "./Navbar";
 import Emoji from "./Emoji";
 
 /* METHODS */
@@ -175,7 +175,7 @@ class App extends Component {
   render() {
     return (
       <Fragment>
-        <Header togglePage={this.togglePage} />
+        <Navbar togglePage={this.togglePage} />
         <main>
           {this.state.showMainPage ? (
             <section className="search-section">

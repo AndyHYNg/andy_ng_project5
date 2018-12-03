@@ -1,10 +1,8 @@
-import React, { Component, Fragment } from "react";
+import React, { Fragment } from "react";
 import Emoji from "./Emoji";
 
-const Header = props => {
+const Navbar = props => {
   return (
-    // mobile-first approach
-    // we want a fixed (bottom) header that stays in place as your scroll with a nav to get around the single page (ids are required)
     <Fragment>
       <div className="fixed-nav-container">
         <div className="nav-emoji-logo">
@@ -17,7 +15,7 @@ const Header = props => {
             <li className="fixed-nav-item">
               <button id="showMainPage" onClick={props.togglePage}>
                 <i className="fas fa-home" />
-                Home
+                Search
               </button>
             </li>
             <li className="fixed-nav-item">
@@ -33,4 +31,4 @@ const Header = props => {
   );
 };
 
-export default Header;
+export default Navbar;
