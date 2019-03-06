@@ -10,7 +10,9 @@ const CocktailList = props => {
     <Fragment>
       <h2>Search Results</h2>
       <div className="results-section-cocktails">
-        {props.cocktails.length === 0 ? (<p>No results. Try searching again!</p>) : ( 
+        {props.cocktails.length === 0 ? (
+          <LoadingComponent />
+        ) : ( 
         props.cocktails.map(currCocktail => {
           return (
             <SingleCocktail
@@ -25,6 +27,15 @@ const CocktailList = props => {
     </Fragment>
   );
 };
+
+const LoadingComponent = () => {
+  return (
+    <div className="loading-component">
+      <p>Searching...</p>
+      <p>If it is searching for over 10 seconds, please try searching again with another keyword.</p> 
+    </div>
+  )
+}
 
 const SingleCocktail = props => {
   let cocktailIngredients = [];
