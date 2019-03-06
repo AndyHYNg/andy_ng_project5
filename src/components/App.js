@@ -18,6 +18,7 @@ import "../App.scss";
 class App extends Component {
   constructor() {
     super();
+    this.submitRef = React.createRef();
     this.state = {
       user: null, // for Google auth
       searchRequest: "",
@@ -132,7 +133,7 @@ class App extends Component {
     this.setState({
       searchRequest: "",
       showSearchCocktails: true
-    });
+    }, this.scrollToSubmitRef);
   };
 
   // save user's text input to
@@ -141,6 +142,10 @@ class App extends Component {
       [e.target.id]: e.target.value
     });
   };
+
+  scrollToSubmitRef = () => {
+    this.submitRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 
   // method to save selected cocktail to user's favourite list
   saveCocktail = (cocktail, cocktailIngredients) => {
@@ -240,11 +245,13 @@ class App extends Component {
           ) : null}
 
           {this.state.showSearchCocktails && this.state.showMainPage ? (
-            <CocktailList
-              saveCocktail={this.saveCocktail}
-              cocktails={this.state.cocktails}
-              userState={this.state.user}
-            />
+            <section ref={this.submitRef} id="results" className="results-section">
+              <CocktailList
+                saveCocktail={this.saveCocktail}
+                cocktails={this.state.cocktails}
+                userState={this.state.user}
+              />
+            </section>
           ) : null}
 
           {this.state.showFavourites ? (

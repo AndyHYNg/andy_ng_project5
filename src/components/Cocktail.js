@@ -7,7 +7,7 @@ const uuidv4 = require("uuid/v4");
 
 const CocktailList = props => {
   return (
-    <section id="results" className="results-section">
+    <Fragment>
       <h2>Search Results</h2>
       <div className="results-section-cocktails">
         {props.cocktails.length === 0 ? (<p>No results. Try searching again!</p>) : ( 
@@ -22,7 +22,7 @@ const CocktailList = props => {
           );
         }))}
       </div>
-    </section>
+    </Fragment>
   );
 };
 
